@@ -1,6 +1,6 @@
-const adminLogin = () => import('./components/Login.vue')
-const adminDashboard = () => import('./components/Home.vue')
-const home = () => import('./components/Home.vue')
+const adminLogin = () => import('./components/Login1.vue')
+const adminDashboard = () => import('./components/Home1.vue')
+const home = () => import('./components/Home1.vue')
 
 export const routes = [
     {   
