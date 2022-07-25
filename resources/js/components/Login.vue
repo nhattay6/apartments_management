@@ -3,34 +3,62 @@
     <div class="container">
       <form action="">
         <div class="row">
-          <h2 style="text-align:center">Login with Social Media or Manually</h2>
+          <h2 style="text-align: center">
+            Login with Social Media or Manually
+          </h2>
+          <div class="vl">
+            <span class="vl-innertext">or</span>
+          </div>
 
-          <div class="col">
+          <!-- <div class="col">
             <a href="#" class="fb btn">
               <i class="fa fa-facebook fa-fw"></i> Login with Facebook
             </a>
             <a href="#" class="twitter btn">
-              <i class="fa fa-twitter fa-fw"></i> Login with Github
+              <i class="fa fa-twitter fa-fw"></i> Login with Twitter
             </a>
             <a href="#" class="google btn">
-              <i class="fa fa-google fa-fw"></i> Login with Google+ (not work)
+              <i class="fa fa-google fa-fw"></i> Login with Google+
             </a>
-          </div>
+          </div> -->
 
           <div class="col">
             <div class="hide-md-lg">
               <p>Or sign in manually:</p>
             </div>
 
-            <input type="text" name="Email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Login" @submit="clickBtn()">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+              v-model="email"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              v-model="password"
+              required
+            />
+            <input type="submit" value="Login" @click="handleLoginForm()" />
           </div>
-
         </div>
       </form>
     </div>
 
+    <div class="bottom-container">
+      <div class="row">
+        <div class="col">
+          <a href="#" style="color: white" class="btn" @click="register()"
+            >Register</a
+          >
+        </div>
+        <div class="col">
+          <a href="#" style="color: white" class="btn">Forgot password?</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,17 +67,43 @@ export default {
   mounted() {
     console.log("Component mounted.");
   },
+  data() {
+    return {
+      email: "",
+      password: "",
+      msg: "",
+      // rememberPw: false,
+      errors: [],
+    };
+  },
   method: {
-    clickBtn() {
-      this.$router.push('/login')
-    }
-  }
+    handleLoginForm() {
+      //if(validate: email and password)
+      const data = { email: this.email, password: this.password };
+      axios
+        .post("/api/auth/login", data)
+        .then(() => {
+          console.log("login");
+        })
+        .catch((err) => {
+          this.errors = err.response.data.errors;
+        });
+    },
+    // validateForm(email, password) {
+    //   regex;
+    // },
+    register() {
+      this.$router.push("/register");
+    },
+  },
 };
 </script>
 
 
 <style>
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+}
 
 /* style the container */
 .container {
@@ -81,12 +135,12 @@ input:hover,
 
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
-  background-color: #3B5998;
+  background-color: #3b5998;
   color: white;
 }
 
 .twitter {
-  background-color: #55ACEE;
+  background-color: #55acee;
   color: white;
 }
 
@@ -96,13 +150,13 @@ input:hover,
 }
 
 /* style the submit button */
-input[type=submit] {
-  background-color: #04AA6D;
+input[type="submit"] {
+  background-color: #04aa6d;
   color: white;
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #45a049;
 }
 

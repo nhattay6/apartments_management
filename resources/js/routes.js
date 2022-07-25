@@ -1,5 +1,6 @@
-const adminLogin = () => import('./components/Login1.vue')
-const adminDashboard = () => import('./components/Home1.vue')
+const login = () => import('./components/Login.vue')
+const register = () => import('./components/Register.vue')
+const dashBoard = () => import('./components/Home1.vue')
 const home = () => import('./components/Home1.vue')
 
 export const routes = [
@@ -9,13 +10,33 @@ export const routes = [
         name: "home"
     },
     {   
+        path: '/home',
+        component: home,
+        name: "home"
+    },
+    {   
         path: '/login',
-        component: adminLogin,
-        name: "adminLogin"
+        component: login,
+        name: "login"
+    },
+    {   
+        path: '/register',
+        component: register,
+        name: "register"
     },
     {
         path: '/dashboard',
-        component: adminDashboard,
-        name: "adminDashboard"
+        component: dashBoard,
+        name: "dashBoard"
     },
+    // {
+    //     path: '/apartment-list',
+    //     component: ,
+    //     name: ""
+    // },
+    // {
+    //     path: '/room-list',
+    //     component: ,
+    //     name: ""
+    // },
 ];
