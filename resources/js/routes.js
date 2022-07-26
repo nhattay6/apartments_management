@@ -1,7 +1,7 @@
 const login = () => import('./components/Login.vue')
 const register = () => import('./components/Register.vue')
-const dashBoard = () => import('./components/Home1.vue')
-const home = () => import('./components/Home1.vue')
+const dashBoard = () => import('./components/Home.vue')
+const home = () => import('./components/Home.vue')
 
 export const routes = [
     {   
@@ -9,11 +9,11 @@ export const routes = [
         component: home,
         name: "home"
     },
-    {   
-        path: '/home',
-        component: home,
-        name: "home"
-    },
+    // {   
+    //     path: '/home',
+    //     component: home,
+    //     name: "home"
+    // },
     {   
         path: '/login',
         component: login,

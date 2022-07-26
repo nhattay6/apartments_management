@@ -76,7 +76,7 @@ export default {
       errors: [],
     };
   },
-  method: {
+  methods: {
     handleLoginForm() {
       //if(validate: email and password)
       const data = { email: this.email, password: this.password };

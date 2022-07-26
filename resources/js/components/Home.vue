@@ -10,9 +10,9 @@ export default {
   mounted() {
     console.log("Component mounted.");
   },
-  method: {
+  methods: {
     nextLoginPage() {
-      this.router.push("/login");
+      this.$router.push("/login");
     },
   },
 };
