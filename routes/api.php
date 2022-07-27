@@ -15,12 +15,18 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login',  [UserController::class, 'login']);
     Route::post('/logout',  [UserController::class, 'logout']);
+
+    Route::post('/refresh', [UserController::class, 'refresh']);
+    Route::get('/user-profile', [UserController::class, 'userProfile']);
 });
+
+// Route::post('/login',  [UserController::class, 'login']);
+// Route::post('/register',  [UserController::class, 'register']);

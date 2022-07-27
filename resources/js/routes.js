@@ -1,6 +1,8 @@
-const login = () => import('./components/Login.vue')
-const register = () => import('./components/Register.vue')
+const login = () => import('./auth/Login.vue')
+const register = () => import('./auth/Register.vue')
+
 const dashBoard = () => import('./components/Home.vue')
+const header = () => import('./layout/Header.vue')
 const home = () => import('./components/Home.vue')
 
 export const routes = [
@@ -29,6 +31,11 @@ export const routes = [
         component: dashBoard,
         name: "dashBoard"
     },
+    {
+        path: '/header',
+        component: header,
+        name: "header"
+    },
     // {
     //     path: '/apartment-list',
     //     component: ,
@@ -39,4 +46,5 @@ export const routes = [
     //     component: ,
     //     name: ""
     // },
+     
 ];

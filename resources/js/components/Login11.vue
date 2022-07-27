@@ -10,18 +10,6 @@
             <span class="vl-innertext">or</span>
           </div>
 
-          <!-- <div class="col">
-            <a href="#" class="fb btn">
-              <i class="fa fa-facebook fa-fw"></i> Login with Facebook
-            </a>
-            <a href="#" class="twitter btn">
-              <i class="fa fa-twitter fa-fw"></i> Login with Twitter
-            </a>
-            <a href="#" class="google btn">
-              <i class="fa fa-google fa-fw"></i> Login with Google+
-            </a>
-          </div> -->
-
           <div class="col">
             <div class="hide-md-lg">
               <p>Or sign in manually:</p>
