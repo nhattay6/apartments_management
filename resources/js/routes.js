@@ -5,6 +5,8 @@ const dashBoard = () => import('./components/Home.vue')
 const header = () => import('./layout/Header.vue')
 const home = () => import('./components/Home.vue')
 
+const apartment = () => import('./components/Apartment.vue')
+
 export const routes = [
     {   
         path: '/',
@@ -35,6 +37,11 @@ export const routes = [
         path: '/header',
         component: header,
         name: "header"
+    },
+        {
+        path: '/apartment',
+        component: apartment,
+        name: "apartment"
     },
     // {
     //     path: '/apartment-list',

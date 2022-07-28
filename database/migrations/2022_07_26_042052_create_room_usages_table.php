@@ -15,6 +15,14 @@ class CreateRoomUsagesTable extends Migration
     {
         Schema::create('room_usages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('apartment_room_id');
+            $table->integer('water_usage_number');
+            $table->integer('electricity_usage_number');
+            $table->dateTime('input_date');
+
+            //FRK
+            $table->foreign('apartment_room_id')->references('id')->on('apartment_rooms')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

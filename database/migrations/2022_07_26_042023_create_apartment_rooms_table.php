@@ -15,6 +15,14 @@ class CreateApartmentRoomsTable extends Migration
     {
         Schema::create('apartment_rooms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('apartment_id');
+            $table->string('room_bumber');
+            $table->string('defaul_price');
+            $table->integer('max_tenant');
+
+            //FRK
+            $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomUsage extends Model
+class RoomFeeCollectionHistories extends Model
 {
     use HasFactory;
 
-    public function apartment_room() {
-        $this->belongsTo(ApartmentRoom::class);
+    public function room_fee_collection() {
+        return $this->belongsTo(RoomFeeCollection::class);
     }
 }
