@@ -2,9 +2,7 @@
   <div>
     <form @submit.prevent="register">
       <div class="containerform" >
-          <!-- <div class="brand-logoform">
-              <img src="" height="100" width="90">
-          </div> -->
+
           <div class="brand-titleform">App Login</div>
           <div class="inputsform">
               <label class="labelform" >Name</label>
@@ -17,9 +15,9 @@
               <input class="inputform" type="password" placeholder="Min 8 charaters long"  v-model="formData.password"/>
 
               <label class="labelform">CONFIRM-PASSWORD</label>
-              <input class="inputform" type="password" placeholder="Min 8 charaters long"  v-model="formData.rePassword"/>
+              <input class="inputform" type="password" placeholder="Min 8 charaters long"  v-model="formData.password_confirmation"/>
 
-              <button class="buttonform" type="submit">Register</button>
+              <button class="buttonform" type="submit" @click="register">Register</button>
           </div>
       </div>
     </form>
@@ -40,19 +38,20 @@ export default {
         name: '',
         email: '',
         password: '',
-        rePassword: ''
+        password_confirmation: ''
       },
       errors: {}
     }
   },
   methods: {
     register() {
-      const urf = '/api/auth/register'
+      const urf = '/api/register'
       axios
         .post(urf, this.formData)
         .then((res) => {
           let token = res.data.token
           localStorage.setItem('token', token)
+          this.$route.push('/home-temp')
         })
         .catch((err) => {
           this.errors = err.res.data.errors;
@@ -62,8 +61,8 @@ export default {
     doLogin() {
       this.$router.push('/login')
     },
-    validatePassword(){
-    }
+    // validatePassword(){
+    // }
   }
 }
 </script>

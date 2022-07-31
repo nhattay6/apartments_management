@@ -1,52 +1,8 @@
 <template>
   <div>
-    <div class="container">
-      <form action="">
-        <div class="row">
-          <h2 style="text-align: center">
-            Login with Social Media or Manually
-          </h2>
-          <div class="vl">
-            <span class="vl-innertext">or</span>
-          </div>
-
-          <div class="col">
-            <div class="hide-md-lg">
-              <p>Or sign in manually:</p>
-            </div>
-
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              required
-              v-model="email"
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              v-model="password"
-              required
-            />
-            <input type="submit" value="Login" @click="handleLoginForm()" />
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <div class="bottom-container">
-      <div class="row">
-        <div class="col">
-          <a href="#" style="color: white" class="btn" @click="register()"
-            >Register</a
-          >
-        </div>
-        <div class="col">
-          <a href="#" style="color: white" class="btn">Forgot password?</a>
-        </div>
-      </div>
-    </div>
+    <h1>Home Page</h1>
+    <button @click="nextLoginPage()">Login</button>
+    <!-- <button @click="logout()">Logout-Temp</button> -->
   </div>
 </template>
 
@@ -55,34 +11,20 @@ export default {
   mounted() {
     console.log("Component mounted.");
   },
-  data() {
-    return {
-      email: "",
-      password: "",
-      msg: "",
-      // rememberPw: false,
-      errors: [],
-    };
-  },
   methods: {
-    handleLoginForm() {
-      //if(validate: email and password)
-      const data = { email: this.email, password: this.password };
-      axios
-        .post("/api/auth/login", data)
-        .then(() => {
-          console.log("login");
-        })
-        .catch((err) => {
-          this.errors = err.response.data.errors;
-        });
+    nextLoginPage() {
+      this.$router.push("/login");
     },
-    // validateForm(email, password) {
-    //   regex;
+    // logout() {
+    //   axios
+    //     .post('api/logout')
+    //     .then((res) => {
+    //       this.$router.push('/login')
+    //     })
+    //     .catch((err) => {
+    //       console.log('ERROR', err)
+    //     })
     // },
-    register() {
-      this.$router.push("/register");
-    },
   },
 };
 </script>

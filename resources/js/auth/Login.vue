@@ -2,16 +2,13 @@
   <div>
     <form @submit.prevent="login">
       <div class="containerform" >
-          <!-- <div class="brand-logoform">
-              <img src="" height="100" width="90">
-          </div> -->
           <div class="brand-titleform">App Login</div>
           <div class="inputsform">
               <label class="labelform">EMAIL</label>
               <input class="inputform" type="email" placeholder="example@test.com"  v-model="formData.email"/>
               <label class="labelform">PASSWORD</label>
               <input class="inputform" type="password" placeholder="Min 8 charaters long" v-model="formData.password"/>
-              <button class="buttonform" type="submit">LOGIN</button>
+              <button class="buttonform" type="submit" @click="login">LOGIN</button>
           </div>
       </div>
     </form>
@@ -36,11 +33,13 @@ export default {
   },
   methods: {
     login() {
-      const urf = '/api/auth/login'
+      const urf = '/api/login'
       axios
         .post(urf, this.formData)
         .then((res) => {
-          
+          let token = res.data.token
+          localStorage.setItem('token', token)
+          this.$router.push('/dashboard')
         })
         .catch((err) => {
           console.log('ERR:', err)

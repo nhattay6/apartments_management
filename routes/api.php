@@ -20,35 +20,44 @@ use App\Http\Controllers\ApartmentRoomController;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
-    Route::post('/register', [UserController::class, 'register']);
-    Route::post('/login',  [UserController::class, 'login']);
-    Route::post('/logout',  [UserController::class, 'logout']);
+// Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+//     Route::post('/register', [UserController::class, 'register']);
+//     Route::post('/login',  [UserController::class, 'login']);
+//     Route::post('/logout',  [UserController::class, 'logout']);
 
-    Route::post('/refresh', [UserController::class, 'refresh']);
-    Route::get('/user-profile', [UserController::class, 'userProfile']);
-});
+//     Route::post('/refresh', [UserController::class, 'refresh']);
+//     Route::get('/user-profile', [UserController::class, 'userProfile']);
+// });
 
-Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::group(['prefix' => 'apartment'], function () {
-        Route::get('/list', [ApartmentController::class, 'listApartment']);
-        Route::post('/add', [ApartmentController::class, 'store']);
-        Route::put('/edit/{id}', [ApartmentController::class, 'update']);
-        Route::delete('/delete/{id}', [ApartmentController::class, 'destroy']);
-        Route::get('/search', [ApartmentController::class, 'search']);
-    });
+// Route::group(['middleware' => ['jwt.verify']], function () {
+//     Route::group(['prefix' => 'apartment'], function () {
+//         Route::get('/list', [ApartmentController::class, 'listApartment']);
+//         Route::post('/add', [ApartmentController::class, 'store']);
+//         Route::put('/edit/{id}', [ApartmentController::class, 'update']);
+//         Route::delete('/delete/{id}', [ApartmentController::class, 'destroy']);
+//         Route::get('/search', [ApartmentController::class, 'search']);
+//     });
     
-    Route::group(['prefix' => 'apartment-room'], function () {
-        Route::get('/detail/{id}', [ApartmentRoomController::class, '']);
-        Route::get('/list', [ApartmentRoomController::class, 'listApartmentRoom']);
-        Route::post('/add', [ApartmentRoomController::class, 'store']);
-        Route::put('/edit/{id}', [ApartmentRoomController::class, 'update']);
-        Route::delete('/delete/{id}', [ApartmentRoomController::class, 'destroy']);
-        Route::get('/search', [ApartmentRoomController::class, 'search']);
-    });
+//     Route::group(['prefix' => 'apartment-room'], function () {
+//         Route::get('/detail/{id}', [ApartmentRoomController::class, '']);
+//         Route::get('/list', [ApartmentRoomController::class, 'listApartmentRoom']);
+//         Route::post('/add', [ApartmentRoomController::class, 'store']);
+//         Route::put('/edit/{id}', [ApartmentRoomController::class, 'update']);
+//         Route::delete('/delete/{id}', [ApartmentRoomController::class, 'destroy']);
+//         Route::get('/search', [ApartmentRoomController::class, 'search']);
+//     });
 
-    // Route::group(['prefix' => ''])
-});
+//     // Route::group(['prefix' => ''])
+// });
 
-// Route::post('/login',  [UserController::class, 'login']);
-// Route::post('/register',  [UserController::class, 'register']);
+Route::post('login',  [UserController::class, 'login']);
+Route::post('register',  [UserController::class, 'register']);
+Route::post('logout',  [UserController::class, 'logout']);
+Route::get('/fetch-user',  [UserController::class, 'fetUser']);
+
+Route::post('email/verification-notification', [EmailVerificationController::class, 'reSendVerificationEmail']);
+Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verificationEmail'])->name('verification.verify');
+
+// Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
+// Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
+

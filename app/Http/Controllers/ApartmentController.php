@@ -23,7 +23,7 @@ class ApartmentController extends Controller
         return response()->json($response);
     }
 
-    public function store(){
+    public function store(Request $request){
         $this->validate($request, [
             'name' => 'required',
             'adress' => 'required',

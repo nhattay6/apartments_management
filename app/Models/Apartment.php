@@ -11,7 +11,8 @@ class Apartment extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function apartment_room() {
+    public function apartment_room(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(ApartmentRoom::class);
     }
 }

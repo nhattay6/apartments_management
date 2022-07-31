@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
 {   
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'logout']]);
     }
 
     public function login() 
@@ -31,7 +31,6 @@ class UserController extends Controller
             'token' => $token,
             'user' => $user
         ]);
-
     }
 
     // public function login(Request $request){
@@ -54,9 +53,9 @@ class UserController extends Controller
     public function register(Request $request) 
     {   
         $request->validate([
-            'name' => ['required', 'string', 'max255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'min:6', 'confirmed']
+            'password' => ['required', 'string', 'min:6', 'confirmed']
         ]);
 
         User::create([
@@ -76,7 +75,7 @@ class UserController extends Controller
             'message' => 'register successful',
             'token' => $token,
             'user' => $user
-        ]);
+        ], 200);
     }
 
     // public function register(Request $request) {
@@ -102,7 +101,7 @@ class UserController extends Controller
     // }
 
     public function logout() {
-        auth()->logout();
+        auth('api')->logout();
         return response()->json(['message' => 'User successfully signed out']);
     }
 
@@ -123,5 +122,36 @@ class UserController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+    
+    public function reSendVerificationEmail(Request $request)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return [
+                'message' => 'Already Verified'
+            ];
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return ['status' => 'verification-link-sent'];
+    }
+
+    public function verificationEmail(EmailVerificationRequest $request)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return [
+                'message' => 'Email already verified'
+            ];
+        }
+
+        if ($request->user()->markEmailAsVerified()) {
+            event(new Verified($request->user()));
+        }
+
+        return [
+            'message'=>'Email has been verified'
+        ];
     }
 }
