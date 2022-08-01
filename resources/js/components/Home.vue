@@ -11,14 +11,16 @@
     <div class="main">
       <div class="menu">
         <div class="menu-item first">
-            <a class="btn-logout" href="" @click="logout()">Logout</a>
+          <a class="btn-logout" href="" @click="logout()">Logout</a>
         </div>
         <div class="menu-item">
-            <span class="infor-admin">Xin chào: {{$user_name}}</span>
+          <span class="infor-admin">Xin chào: {{ $user_name }}</span>
         </div>
-
       </div>
-      <div class="block-content" v-if="numberPage == 0">
+      <div class="block-content">
+        <h1>aaa</h1>
+      </div>
+      <!-- <div class="block-content" v-if="numberPage == 0">
         <Apartment />
       </div>
       <div class="block-content" v-if="numberPage == 1">
@@ -29,48 +31,52 @@
       </div>
       <div class="block-content" v-if="numberPage == 3">
         <Apartment />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import Apartment from "../pages/apartment/ApartmentList.vue"
-import ApartmentRoom from "../pages/room/RoomList.vue"
+// import Apartment from "../pages/apartment/ApartmentList.vue"
+// import ApartmentRoom from "../pages/room/RoomList.vue"
 
 export default {
   name: "Home",
-  components: {Apartment, ApartmentRoom},
+  // components: { Apartment, ApartmentRoom },
   data() {
     return {
-      categoryList: ["Quản lý tòa nhà", "Quản lý phòng trọ", "Quản lý tiền trọ hàng tháng", "Thống kê"],
+      categoryList: [
+        "Quản lý tòa nhà",
+        "Quản lý phòng trọ",
+        "Quản lý tiền trọ hàng tháng",
+        "Thống kê",
+      ],
       numberPage: null,
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    doApartmentPage(){
-      this.numberPage = 0
+    doApartmentPage() {
+      this.numberPage = 0;
     },
-    doRoomPage(){
-      this.numberPage = 1
+    doRoomPage() {
+      this.numberPage = 1;
     },
-    doRoomFeePage(){
-       this.numberPage = 2
+    doRoomFeePage() {
+      this.numberPage = 2;
     },
-    dostatistic(){
-      this.numberPage = 3
+    dostatistic() {
+      this.numberPage = 3;
     },
     logout() {
       axios
-        .post('api/logout')
+        .post("api/logout")
         .then((res) => {
-          this.$router.push('/login')
+          this.$router.push("/login");
         })
         .catch((err) => {
-          console.log('ERROR', err)
-        })
+          console.log("ERROR", err);
+        });
     },
   },
 };
