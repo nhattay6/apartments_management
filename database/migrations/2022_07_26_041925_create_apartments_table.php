@@ -21,6 +21,7 @@ class CreateApartmentsTable extends Migration
             $table->string('district');
             $table->string('ward');
             $table->string('address');
+            // $table->image('image');
 
             //FRK
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

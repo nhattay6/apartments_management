@@ -15,7 +15,7 @@ class CreateRoomFeeCollectionsTable extends Migration
     {
         Schema::create('room_fee_collections', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tenant_contract_id')->unsigned();
+            $table->unsignedBigInteger('tenant_contract_id');
             $table->unsignedBigInteger('apartment_room_id');
             $table->unsignedBigInteger('tenant_id');
             $table->integer('electricity_number_before');

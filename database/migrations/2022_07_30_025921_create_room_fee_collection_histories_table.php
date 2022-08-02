@@ -15,12 +15,12 @@ class CreateRoomFeeCollectionHistoriesTable extends Migration
     {
         Schema::create('room_fee_collection_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('room_fee_collection_id');
+            // $table->unsignedBigInteger('room_fee_collection_id');
             $table->dateTime('paid_date');
             $table->bigInteger('price');
 
             //FRK
-            $table->foreign('room_fee_collection_id')->references('id')->on('room_fee_collections')->onDelete('cascade');
+            // $table->foreign('room_fee_collection_id')->references('id')->on('room_fee_collections')->onDelete('cascade');
 
             $table->timestamps();
         });

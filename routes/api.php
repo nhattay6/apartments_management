@@ -73,11 +73,11 @@ Route::group(['prefix' => 'apartment'], function () {
 });
  
 Route::group(['prefix' => 'apartment-room'], function () {
-  Route::get('/list', [ApartmentRoomController::class, 'listRoom']);
+  Route::get('/list/{id}', [ApartmentRoomController::class, 'listRoom']);
   Route::post('/add', [ApartmentRoomController::class, 'create']);
   Route::post('/edit/{id}', [ApartmentRoomController::class, 'editRoom']);
   Route::post('/edit-room-user/{id}', [ApartmentRoomController::class, 'editRoomUser']);
   Route::get('/find/{id}', [ApartmentRoomController::class, 'findRoomById']);
   Route::delete('/delete/{id}', [ApartmentRoomController::class, 'destroy']);
-  Route::get('/search', [ApartmentRoomController::class, 'search']);
+  Route::post('/search', [ApartmentRoomController::class, 'search']);
 });

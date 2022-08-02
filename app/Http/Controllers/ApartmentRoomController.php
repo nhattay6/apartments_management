@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ApartmentRoom;
 use App\Models\Tenant;
+use App\Models\TenantContract;
 class ApartmentRoomController extends Controller
 {
     public function listRoom($apartmentId) {
-        $list = ApartmentRoom::where('apartment_id', $apartmentId)->orderby('id', 'asc')->pagination(5);
-        return response()->json($list);
+        $list = ApartmentRoom::where('apartment_id', $apartmentId)->orderBy('id')->paginate(5);
+        return response()->json(['data' => $list]);
     }
 
     public function create(Request $request, $apartmentId) {
@@ -32,7 +33,7 @@ class ApartmentRoomController extends Controller
         ];
 
         $create = ApartmentRoom::create($newRoom);
-        return response()->json($create);
+        return response()->json(['data' => $create]);
     }
 
     public function editRoom (Request $request, $id) {
@@ -48,7 +49,7 @@ class ApartmentRoomController extends Controller
             $storedPath = $image->move('img/apartment', $image->getClientOriginalName());
             $roomInfo['room_image'] = $image->getClientOriginalName();
         } 
-
+        
         $edit = ApartmentRoom::find($id)->update($roomInfo);
         return response()->json($edit);
     }
@@ -58,16 +59,19 @@ class ApartmentRoomController extends Controller
         $edit = [
             'name' => $request->name,
             'tel' => $request->tel,
-            'identify_card_number' => $request->identify_card_number
+            'identity_card_number' => $request->identity_card_number,
         ];
-        $editUserRoom = Tenant::where('apartment_room_id', $id);
-        if(! empty($editUserRoom)){
-            $editUserRoom = $editUserRoom->create($edit);
+
+        $editUserRoom = TenantContract::where('apartment_room_id', $id)->first();
+        $tenant = Tenant::where('id', $editUserRoom['tenant_id'])->first();
+
+        if(empty($tenant)){
+            $tenant = Tenant::create($edit);
         } else {
-            $editUserRoom = $editUserRoom->update($edit);
+            $tenant = $tenant->update($edit);
         }
 
-        return response()->json($editUserRoom);
+        return response()->json(['data' => $tenant]);
     }   
 
     public function findRoomById($id) {
@@ -81,11 +85,11 @@ class ApartmentRoomController extends Controller
     }
 
     //search with room number
-    public function search($roomNumber) {
-        if(! empty($roomNumber)){
-            $room = ApartmentRoom::where('room_number', $roomNumber);
+    public function search(Request $request) {
+        if(! empty($request->room_number)){
+            $room = ApartmentRoom::where('room_bumber', $request->room_number)->first();
         }
         
-        return response()->json($room->get());
+        return response()->json(['data' =>  $room]);
     }
 }

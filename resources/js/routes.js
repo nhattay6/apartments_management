@@ -5,10 +5,10 @@ const verify = () => import('./auth/Verify.vue')
 const dashBoard = () => import('./components/DashBoard.vue')
 const header = () => import('./layout/Header.vue')
 const home = () => import('./components/Home.vue')
-
 const homeTemp = () => import('./components/HomeTemp.vue')
-
 const apartment = () => import('./components/Apartment.vue')
+
+const test = () => import('./layout/Test.vue')
 
 export const routes = [
     {   
@@ -52,7 +52,7 @@ export const routes = [
         props: true,
         component: verify,
         // beforeEnter: auth,
-      }
+    },
     // {
     //     path: '/apartment-list',
     //     component: ,
@@ -63,5 +63,9 @@ export const routes = [
     //     component: ,
     //     name: ""
     // },
-     
+    {
+        path: '/test',
+        component: test,
+        name: "test"
+    },
 ];

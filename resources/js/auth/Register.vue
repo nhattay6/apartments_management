@@ -1,70 +1,87 @@
 <template>
   <div>
     <form @submit.prevent="register">
-      <div class="containerform" >
+      <div class="containerform">
+        <div class="brand-titleform">App Login</div>
+        <div class="inputsform">
+          <label class="labelform">Name</label>
+          <input class="inputform" type="text" v-model="formData.name" />
 
-          <div class="brand-titleform">App Login</div>
-          <div class="inputsform">
-              <label class="labelform" >Name</label>
-              <input class="inputform" type="text"  v-model="formData.name"/>
+          <label class="labelform">EMAIL</label>
+          <input
+            class="inputform"
+            type="email"
+            placeholder="example@test.com"
+            v-model="formData.email"
+          />
 
-              <label class="labelform">EMAIL</label>
-              <input class="inputform" type="email" placeholder="example@test.com"   v-model="formData.email"/>
+          <label class="labelform">PASSWORD</label>
+          <input
+            class="inputform"
+            type="password"
+            placeholder="Min 8 charaters long"
+            v-model="formData.password"
+          />
 
-              <label class="labelform">PASSWORD</label>
-              <input class="inputform" type="password" placeholder="Min 8 charaters long"  v-model="formData.password"/>
+          <label class="labelform">CONFIRM-PASSWORD</label>
+          <input
+            class="inputform"
+            type="password"
+            placeholder="Min 8 charaters long"
+            v-model="formData.password_confirmation"
+          />
 
-              <label class="labelform">CONFIRM-PASSWORD</label>
-              <input class="inputform" type="password" placeholder="Min 8 charaters long"  v-model="formData.password_confirmation"/>
-
-              <button class="buttonform" type="submit" @click="register">Register</button>
-          </div>
+          <button class="buttonform" type="submit" @click="register">
+            Register
+          </button>
+        </div>
       </div>
     </form>
     <div>
       <button class="buttonform" @click="doLogin()">Login</button>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "register",
   data() {
     return {
       formData: {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
       },
-      errors: {}
-    }
+      errors: {},
+    };
   },
   methods: {
     register() {
-      const urf = '/api/register'
+      console.log("aaa");
+      const urf = "/api/register";
       axios
         .post(urf, this.formData)
         .then((res) => {
-          let token = res.data.token
-          localStorage.setItem('token', token)
-          this.$route.push('/home-temp')
+          let token = res.data.token;
+          localStorage.setItem("token", token);
+          this.$route.push("/home-temp");
         })
         .catch((err) => {
           this.errors = err.res.data.errors;
-          console.log(err)
-        })
+          console.log(err);
+        });
     },
     doLogin() {
-      this.$router.push('/login')
+      this.$router.push("/login");
     },
     // validatePassword(){
     // }
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
@@ -79,13 +96,12 @@ export default {
   background: #ecf0f3;
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
   margin: auto;
-
 }
 
 .brand-logoform {
   height: 100px;
   width: 100px;
-  text-align:center ;
+  text-align: center;
   margin: auto;
   border-radius: 50%;
   box-sizing: border-box;
@@ -96,7 +112,7 @@ export default {
   margin-top: 10px;
   font-weight: 900;
   font-size: 1.8rem;
-  color: #1DA1F2;
+  color: #1da1f2;
   letter-spacing: 1px;
 }
 
@@ -105,7 +121,9 @@ export default {
   margin-top: 30px;
 }
 
-.labelform, .inputform, .buttonform {
+.labelform,
+.inputform,
+.buttonform {
   display: block;
   width: 100%;
   padding: 0;
@@ -139,7 +157,7 @@ export default {
 .buttonform {
   color: white;
   margin-top: 20px;
-  background: #1DA1F2;
+  background: #1da1f2;
   height: 40px;
   border-radius: 20px;
   cursor: pointer;
@@ -172,5 +190,4 @@ export default {
 .d-flex .btn {
   margin: 10px;
 }
-
 </style>

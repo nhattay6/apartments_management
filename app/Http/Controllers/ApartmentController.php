@@ -8,19 +8,24 @@ use App\Models\Apartment;
 class ApartmentController extends Controller
 {
     public function listApartment(Request $request) {
-        //$apartment  = Apartment::lastest()->pagination(5);
+        // $apartment  = Apartment::lastest()->pagination(5);
+
+        // $apartment  = Apartment::all()->orderBy('id')->paginate(5)->get();
         // $response = [
         //     'pagination' => [
-        //         'total' => $apartment->total(),
+        //         'data' => $apartment->items(),
+        //         'totalRecord' => $apartment->total(), 
         //         'per_page' => $apartment->perPage(),
         //         'current_page' => $apartment->currentPage(),
-        //         'last_page' => $apartment->lastPage(),
-        //         'from' => $apartment->firstItem(),
-        //         'to' => $apartment->lastItem(),
+        //         // 'last_page' => $apartment->lastPage(),
+        //         // 'from' => $apartment->firstItem(),
+        //         // 'to' => $apartment->lastItem(),
         //     ]
         // ];
-        $apartment = Apartment::orderby('id', 'asc')->paginate(5)->get();
-        return response()->json($apartment);
+        // $apartment = Apartment::all();
+
+        $apartment = Apartment::orderBy('id')->paginate(6);
+        return response()->json(['data' => $apartment]);
     }
 
     public function create(Request $request){
@@ -44,7 +49,7 @@ class ApartmentController extends Controller
 
         $create = Apartment::create($newApartment);
 
-        return response()->json($create);
+        return response()->json(['data' => $create]);
     }
 
     public function edit(Request $request, $id){
@@ -62,12 +67,12 @@ class ApartmentController extends Controller
 
         $edit = Apartment::find($id)->update($apartment);
         
-        return response()->json($edit);
+        return response()->json(['data' => $edit]);
     }
 
     public function findById($id) {
         $apartment = Apartment::find($id);
-        return respone()->json($apartment);
+        return response()->json(['data' => $apartment]);
     }
 
     public function destroy($id) {
@@ -76,15 +81,16 @@ class ApartmentController extends Controller
     }
 
     public function search($name, $address) {
-        $listApartment = Apartment::orderby('id', 'asc');
+        // $listApartment = Apartment::orderBy('id');
         if(!empty($name)) {
-            $listApartment = $listApartment->where('name', 'LIKE', '%' . $name . '%');
+            // $listApartment = $listApartment->where('name', 'LIKE', '%' . $name . '%');
+            $listApartment = Apartment::where('name', 'LIKE', '%' . $name . '%')->orderBy('name');
         }
         if(!empty($address)) {
-            $listApartment = $listApartment->where('name', 'LIKE', '%' . $address . '%');
+            // $listApartment = $listApartment->where('name', 'LIKE', '%' . $address . '%');
+            $listApartment = Apartment::where('name', 'LIKE', '%' . $address . '%')->orderBy('address');
         }
-        
-        $listApartment =  $listApartment->get();
-        return response()->json($listApartment);
+        // $listApartment =  $listApartment->get();
+        return response()->json(['data' => $listApartment]);
     }
 }

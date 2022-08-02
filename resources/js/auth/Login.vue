@@ -1,55 +1,65 @@
 <template>
   <div>
     <form @submit.prevent="login">
-      <div class="containerform" >
-          <div class="brand-titleform">App Login</div>
-          <div class="inputsform">
-              <label class="labelform">EMAIL</label>
-              <input class="inputform" type="email" placeholder="example@test.com"  v-model="formData.email"/>
-              <label class="labelform">PASSWORD</label>
-              <input class="inputform" type="password" placeholder="Min 8 charaters long" v-model="formData.password"/>
-              <button class="buttonform" type="submit" @click="login">LOGIN</button>
-          </div>
+      <div class="containerform">
+        <div class="brand-titleform">App Login</div>
+        <div class="inputsform">
+          <label class="labelform">EMAIL</label>
+          <input
+            class="inputform"
+            type="email"
+            placeholder="example@test.com"
+            v-model="formData.email"
+          />
+          <label class="labelform">PASSWORD</label>
+          <input
+            class="inputform"
+            type="password"
+            placeholder="Min 8 charaters long"
+            v-model="formData.password"
+          />
+          <button class="buttonform" type="submit" @click="login">LOGIN</button>
+        </div>
       </div>
     </form>
     <div>
       <button class="buttonform" @click="doRegister()">Register</button>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "login",
   data() {
     return {
       formData: {
-        email: '',
-        password: ''
-      }
-    }
+        email: "",
+        password: "",
+      },
+    };
   },
   methods: {
     login() {
-      const urf = '/api/login'
+      const urf = "/api/login";
       axios
         .post(urf, this.formData)
         .then((res) => {
-          let token = res.data.token
-          localStorage.setItem('token', token)
-          this.$router.push('/dashboard')
+          let token = res.data.token;
+          localStorage.setItem("token", token);
+          this.$router.push("/home");
         })
         .catch((err) => {
-          console.log('ERR:', err)
-        })
+          console.log("ERR:", err);
+        });
     },
     doRegister() {
-      this.$router.push('/register')
-    }
-  }
-}
+      this.$router.push("/register");
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -64,13 +74,12 @@ export default {
   background: #ecf0f3;
   box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
   margin: auto;
-
 }
 
 .brand-logoform {
   height: 100px;
   width: 100px;
-  text-align:center ;
+  text-align: center;
   margin: auto;
   border-radius: 50%;
   box-sizing: border-box;
@@ -81,7 +90,7 @@ export default {
   margin-top: 10px;
   font-weight: 900;
   font-size: 1.8rem;
-  color: #1DA1F2;
+  color: #1da1f2;
   letter-spacing: 1px;
 }
 
@@ -90,7 +99,9 @@ export default {
   margin-top: 30px;
 }
 
-.labelform, .inputform, .buttonform {
+.labelform,
+.inputform,
+.buttonform {
   display: block;
   width: 100%;
   padding: 0;
@@ -124,7 +135,7 @@ export default {
 .buttonform {
   color: white;
   margin-top: 20px;
-  background: #1DA1F2;
+  background: #1da1f2;
   height: 40px;
   border-radius: 20px;
   cursor: pointer;
@@ -157,5 +168,4 @@ export default {
 .d-flex .btn {
   margin: 10px;
 }
-
 </style>

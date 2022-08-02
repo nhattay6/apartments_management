@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RoomFeeCollectionHistories extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id';
     public function room_fee_collection() {
         return $this->belongsTo(RoomFeeCollection::class);
     }

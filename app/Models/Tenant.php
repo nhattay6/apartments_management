@@ -9,11 +9,16 @@ class Tenant extends Model
 {
     use HasFactory;
 
-    public function room_fee_collection() { 
-        $this->belongsTo(RoomFeeCollection::class);
-    }
+    protected $fillable = [
+        'id','name', 'tel','email','identity_card_number'
+    ];
 
-    public function tenant_contract() {
-        $this->belongsTo(TenantContract::class);
+    protected $primaryKey = 'id';
+
+    public function tenantContract(){
+        return $this->hasMany(TenantContract::Class, 'id');
+    }
+    public function roomFee() { 
+        $this->belongsTo(RoomFeeCollection::class);
     }
 }
