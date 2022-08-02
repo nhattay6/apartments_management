@@ -81,3 +81,8 @@ export default {
   },
 };
 </script>
+
+<style>
+@import "../../css/extend.css";
+@import "../../css/custom2.css";
+</style>
