@@ -3,10 +3,11 @@
     <div>
       <h1>Add Apartment</h1>
     </div>
+    <div>
+      <button @click="back()">Back</button>
+    </div>
     <div class="container">
-      <form
-        action=""
-      >
+      <form action="">
         <label for="fname">Apartment Name</label>
         <!-- <ul>
           <li style="color: red">{{ $message }}</li>
@@ -33,7 +34,7 @@
           v-model="addFormData.address"
         />
         <label>Ảnh</label><br />
-        
+
         <!-- Back -->
         <input
           class="input-custom"
@@ -42,39 +43,45 @@
           onchange="preview()"
           v-on:change="addFormData.image"
         />
-        <br/>
+        <br />
         <img id="frame" src="" width="100px" height="100px" /><br />
-        <input class="input-custom" type="submit" value="Submit" @click="submitForm"/>
+        <input
+          class="input-custom"
+          type="submit"
+          value="Submit"
+          @click="submitForm"
+        />
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { axios } from "vue/types/umd";
-
 export default {
-  mounted() {
-  },
+  mounted() {},
   data() {
     return {
       addFormData: {
-        name: '',
-        adress: '',
-        image: '',
+        name: "",
+        adress: "",
+        image: "",
       },
     };
   },
   methods: {
+    back() {
+      this.$router.push("/home/apartment");
+    },
     validateForm() {},
-    submitForm() {//use validate form},
+    submitForm() {
+      //use validate form},
     },
   },
-}
+};
 </script>
 
 <style>
-@import "../../css/extend.css";
-@import "../../css/custom2.css";
-@import "../../css/custom.css";
+@import "../../../css/extend.css";
+@import "../../../css/custom2.css";
+@import "../../../css/custom.css";
 </style>

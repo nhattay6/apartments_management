@@ -1,11 +1,10 @@
 <template>
   <div>
-    <!-- <div> Nen V-for o day</div> -->
     <div class="sidenav">
-      <a href="" @click="doApartmentPage">Quản lý tòa nhà</a>
-      <a href="" @click="doRoomPage">Quản lý phòng trọ</a>
-      <a href="" @click="doRoomFeePage">Quản lý tiền trọ hàng tháng</a>
-      <a href="" @click="dostatistic">Thống kê</a>
+      <a href="" @click="doApartmentPage()">Quản lý tòa nhà</a>
+      <a href="" @click="doRoomPage()">Quản lý phòng trọ</a>
+      <a href="" @click="doRoomFeePage()">Quản lý tiền trọ hàng tháng</a>
+      <a href="" @click="dostatistic()">Thống kê</a>
     </div>
 
     <div class="main">
@@ -14,64 +13,41 @@
           <a class="btn-logout" href="" @click="logout()">Logout</a>
         </div>
         <div class="menu-item">
-          <span class="infor-admin">Xin chào: {{ $user_name }}</span>
+          <span class="infor-admin">Xin chào:</span>
         </div>
       </div>
       <div class="block-content">
-        <h1>aaa</h1>
+        <router-view></router-view>
       </div>
-      <!-- <div class="block-content" v-if="numberPage == 0">
-        <Apartment />
-      </div>
-      <div class="block-content" v-if="numberPage == 1">
-        <ApartmentRoom />
-      </div>
-      <div class="block-content" v-if="numberPage == 2">
-        <ApartmentRoom />
-      </div>
-      <div class="block-content" v-if="numberPage == 3">
-        <Apartment />
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-// import Apartment from "../pages/apartment/ApartmentList.vue"
-// import ApartmentRoom from "../pages/room/RoomList.vue"
-
 export default {
   name: "Home",
-  // components: { Apartment, ApartmentRoom },
   data() {
-    return {
-      categoryList: [
-        "Quản lý tòa nhà",
-        "Quản lý phòng trọ",
-        "Quản lý tiền trọ hàng tháng",
-        "Thống kê",
-      ],
-      numberPage: null,
-    };
+    return {};
   },
   computed: {},
   methods: {
     doApartmentPage() {
-      this.numberPage = 0;
+      this.$router.push("/home/apartment");
     },
     doRoomPage() {
-      this.numberPage = 1;
+      // this.$router.push("/home/room");
     },
     doRoomFeePage() {
-      this.numberPage = 2;
+      // this.$router.push("/home/room-fee");
     },
     dostatistic() {
-      this.numberPage = 3;
+      // this.$router.push("/home/statistic");
     },
     logout() {
       axios
         .post("api/logout")
         .then((res) => {
+          // localStorage.removeItem()
           this.$router.push("/login");
         })
         .catch((err) => {

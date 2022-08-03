@@ -10,11 +10,37 @@ const apartment = () => import('./components/Apartment.vue')
 
 const test = () => import('./layout/Test.vue')
 
+// apartment
+const listApartment = () => import('./pages/apartment/ListApartment.vue')
+const addApartment = () => import('./pages/apartment/AddApartment.vue')
+const editApartment = () => import('./pages/apartment/EditApartment.vue')
+
+// const searchApartment = () => import('./pages/apartment/SearchApartment.vue')
+
+
 export const routes = [
     {   
         path: '/home',
         component: home,
-        name: "home"
+        children: [
+            { 
+                path: '/home/apartment', 
+                name: 'apartment-list', 
+                component: listApartment, 
+                // children: [
+                //     {
+                //         path: '/home/apartment/add', 
+                //         name: 'apartment-add', 
+                //         component: addApartment, 
+                //     },
+                 
+                // ] 
+            },
+            { path: '/home/apartment-add', name: 'apartment-add', component: addApartment },
+            { path: '/home/apartment-edit/:id', name: 'apartment-edit', component: editApartment },
+            // { path: '/room', name: 'room-list', component: listApartment },
+            // { path: '/apartment', name: 'apartment-list', component: listApartment },
+        ],
     },
     {   
         path: '/home-temp',
@@ -41,11 +67,11 @@ export const routes = [
         component: header,
         name: "header"
     },
-    {
-        path: '/apartment',
-        component: apartment,
-        name: "apartment"
-    },
+    // {
+    //     path: '/apartment',
+    //     component: apartment,
+    //     name: "apartment"
+    // },
     {
         path: "/verify/:hash",
         name: "Verify",
@@ -68,4 +94,7 @@ export const routes = [
         component: test,
         name: "test"
     },
+    // { path: '/apartment/add', name: 'add-apartment', component: addApartment },
+    // { path: '/apartment/edit', name: 'edit-apartment', component: editApartment },
+    // { path: '/apartment/search', name: 'search-apartment', component: searchApartment },
 ];

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}?{{config('versions.css')}}">
 </head>
 <body>
-<div id="app"></div>
-<script src="{{ asset('js/app.js') }}?{{config('versions.js')}}"></script>
+    <div id="app"></div>
+    <script src="{{ asset('js/app.js') }}?{{config('versions.js')}}"></script>
 </body>
 </html>
+

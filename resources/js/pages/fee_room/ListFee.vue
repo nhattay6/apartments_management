@@ -1,54 +1,45 @@
 <template>
   <div>
-    <h1>List Room</h1>
+    <h1>{{ __("Danh sách phòng trọ") }}</h1>
     <div class="block-search">
-      <form action="">
+      <form action="{{route('room.search')}}" method="post">
         <label>Apartment Name:</label><input name="apartment" type="text" />
-        <label>Eoom Number: </label><input name="room_number" type="text" />
-        <input type="submit" value="Tìm kiếm" @click="search()" />
+        <label>Room Number: </label><input name="room_number" type="text" />
+        <input type="submit" value="Tìm kiếm" @click="search" />
       </form>
-      <a class="btn-form" @click="addRoom()">Add</a>
     </div>
     <div>
       <table id="apartment">
         <tr>
-          <th>Số phòng</th>
-          <th>Giá thuê</th>
-          <th>Số người ở</th>
-          <th>Toà nhà</th>
-          <th>Ảnh</th>
+          <th>Room Number</th>
+          <th>Price</th>
+          <th>Tenant Number</th>
+          <th>Apartment</th>
+          <th>image</th>
           <th></th>
         </tr>
-
-        <tr v-for="(room, index) in listRoom" :key="index">
-          <td>{{ room.room_number }}</td>
+        <tr v-for="room in listRoom" :key="room.id">
+          <td>{{ room.roomNumber }}</td>
           <td>{{ room.price }} .VND</td>
-          <td>{{ room.max_number }}</td>
-          <td>{{ room.apartment["name"] }}</td>
+          <td>{{ room.max_tenant }}</td>
+          <td>{{ room.apartmentName }}</td>
           <td>
             <div class="content-img">
               <img
                 width="50px;"
                 height="50px;"
-                :src="'/img/apartment_room/' + room.image"
+                :src="'/img/apartment_room/' + room.room_image"
               />
             </div>
           </td>
           <td>
             <div class="container-btn">
-              <a class="btn-form" @click="checkInfo">Check</a>
-              <a class="btn-form" @click="editRoom">Edit</a>
-              <!-- thêm confirm -->
-              <a class="btn-form delete" @click="deleteRoom">Delete</a>
+              <a class="btn-form" @click="show()"> Show </a>
             </div>
           </td>
         </tr>
       </table>
     </div>
-    <!-- pagination -->
-    <!-- <div class="block-pagination" style="width: 21%;float: right;padding-top: 20px;">
-      {{ $listRoom->links() }}
-    </div> -->
   </div>
 </template>
 
@@ -81,7 +72,7 @@ export default {
       return data;
     },
     addRoom() {},
-    checkInfo(roomId) {},
+    showRoom(roomId) {},
     editRoom(roomId) {},
     deleteRoom(roomId) {
       // bo sung them sử kiện confirm},
