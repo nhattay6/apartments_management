@@ -71,7 +71,8 @@ Route::group(['prefix' => 'apartment'], function () {
   Route::delete('/delete/{id}', [ApartmentController::class, 'destroy']);
   Route::get('/search', [ApartmentController::class, 'search']);
 });
- 
+
+//apartment-room
 Route::group(['prefix' => 'apartment-room'], function () {
   Route::get('/list/{id}', [ApartmentRoomController::class, 'listRoom']);
   Route::post('/add', [ApartmentRoomController::class, 'create']);

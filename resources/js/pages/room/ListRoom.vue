@@ -12,11 +12,11 @@
     <div>
       <table id="apartment">
         <tr>
-          <th>Số phòng</th>
-          <th>Giá thuê</th>
-          <th>Số người ở</th>
-          <th>Toà nhà</th>
-          <th>Ảnh</th>
+          <th>Room Number</th>
+          <th>Default price</th>
+          <th>Tenant number</th>
+          <th>Apartment</th>
+          <th>Image</th>
           <th></th>
         </tr>
 

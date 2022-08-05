@@ -96,7 +96,7 @@ export default {
       this.$router.push("/home/apartment-add");
     },
     editApartment(apartmentId) {
-      this.$router.push();
+      this.$router.push("/home/apartmennt-edit/" + id);
     },
     deleteApartment(apartmentId) {
       // bo sung them sử kiện confirm},
