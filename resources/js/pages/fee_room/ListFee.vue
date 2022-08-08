@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>{{ __("Danh sách phòng trọ") }}</h1>
+    <h1>List Room Fee</h1>
     <div class="block-search">
-      <form action="{{route('room.search')}}" method="post">
+      <form action="">
         <label>Apartment Name:</label><input name="apartment" type="text" />
         <label>Room Number: </label><input name="room_number" type="text" />
         <input type="submit" value="Tìm kiếm" @click="search" />
@@ -18,11 +18,12 @@
           <th>image</th>
           <th></th>
         </tr>
-        <tr v-for="room in listRoom" :key="room.id">
-          <td>{{ room.roomNumber }}</td>
-          <td>{{ room.price }} .VND</td>
+        <tr v-for="room in listRoomFee" :key="room.id">
+          <td>{{ room.room_bumber }}</td>
+          <td>{{ room.defaul_price }} .VND</td>
           <td>{{ room.max_tenant }}</td>
-          <td>{{ room.apartmentName }}</td>
+          <!-- <td>{{ room.apartmentName }}</td> -->
+          <td>apartmentName</td>
           <td>
             <div class="content-img">
               <img
@@ -34,7 +35,7 @@
           </td>
           <td>
             <div class="container-btn">
-              <a class="btn-form" @click="show()"> Show </a>
+              <a class="btn-form" @click="showRoom(room.id)"> Show </a>
             </div>
           </td>
         </tr>
@@ -46,11 +47,11 @@
 <script>
 export default {
   mounted() {
-    this.fetchApartment();
+    this.getListRoom();
   },
   data() {
     return {
-      listRoom: [],
+      listRoomFee: [],
       searchStatus: false,
       searchValue: {
         apartmentName: "",
@@ -59,12 +60,12 @@ export default {
     };
   },
   methods: {
-    async getApartementList() {
-      const url = "/api/apartments";
+    async getListRoom() {
+      const url = "/api/fee/list";
       const data = await axios
         .get(url)
         .then((res) => {
-          this.listRoom = res.data;
+          this.listRoomFee = res.data;
         })
         .catch((err) => {
           return err;

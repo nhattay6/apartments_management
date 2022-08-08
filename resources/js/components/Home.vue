@@ -38,7 +38,7 @@ export default {
       // this.$router.push("/home/room");
     },
     doRoomFeePage() {
-      // this.$router.push("/home/room-fee");
+      this.$router.push("/home/fee-list");
     },
     dostatistic() {
       // this.$router.push("/home/statistic");

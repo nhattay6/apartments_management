@@ -100,6 +100,7 @@ export default {
     },
     deleteApartment(apartmentId) {
       // bo sung them sử kiện confirm},
+      // this.$router.push("/home/apartmennt-delete/" + id);
     },
     search() {},
   },

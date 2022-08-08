@@ -16,7 +16,8 @@ const addApartment = () => import('./pages/apartment/AddApartment.vue')
 const editApartment = () => import('./pages/apartment/EditApartment.vue')
 
 // const searchApartment = () => import('./pages/apartment/SearchApartment.vue')
-
+// room fee
+const listFee = () => import('./pages/fee_room/ListFee.vue') 
 
 export const routes = [
     {   
@@ -39,7 +40,7 @@ export const routes = [
             { path: '/home/apartment-add', name: 'apartment-add', component: addApartment },
             { path: '/home/apartment-edit/:id', name: 'apartment-edit', component: editApartment },
             // { path: '/room', name: 'room-list', component: listApartment },
-            // { path: '/apartment', name: 'apartment-list', component: listApartment },
+            { path: '/home/fee-list', name: 'fee-list', component: listFee },
         ],
     },
     {   

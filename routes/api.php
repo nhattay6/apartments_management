@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\ApartmentRoomController;
+use App\Http\Controllers\RoomFeeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,4 +83,11 @@ Route::group(['prefix' => 'apartment-room'], function () {
   Route::get('/find/{id}', [ApartmentRoomController::class, 'findRoomById']);
   Route::delete('/delete/{id}', [ApartmentRoomController::class, 'destroy']);
   Route::post('/search', [ApartmentRoomController::class, 'search']);
+});
+
+
+// room fee
+Route::group(['prefix' => 'fee'], function () {
+  Route::get('/list', [RoomFeeController::class, 'listRoomFee']);
+  Route::get('/list/{id}', [RoomfeeController::class, 'listReceipt']);
 });
