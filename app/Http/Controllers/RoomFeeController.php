@@ -14,20 +14,29 @@ class RoomFeeController extends Controller
         return response()->json($list);
     }
 
-    // public function listReceipt($apartmentId) {
-    //     $listReceipt = RoomFeeColection::where('apartment_room_id', $apartmentId)->get();
-    //     $contractCurrent = TenantContract::whereMonth('end_date', '>=', date('m'))->where('apartment_room_id', $apartmentId)->first();
-    //     $data = [
 
-    //     ];
-    //     return response()->json(); 
-    // }   
+    // dữ liệu chưa như ý - theo từng phòng
+    public function listReceipt($id) {
+        // $listReceipt = RoomFeeColection::where('apartment_room_id', $apartmentId)->get();
+
+        $listReceipt = RoomFeeCollection::find($id);
+        $contractCurrent = TenantContract::whereMonth('end_date', '>=', date('m'))->where('apartment_room_id', $id)->first();
+
+        //compact dữ liệu - xem lại chỗ này
+        $data = [
+            'list_receipt' => $listReceipt,
+            'contract_current' => $contractCurrent,
+        ];
+
+        return response()->json($data); 
+    }  
+
     public function fethRoomById() {
     
     }
 
-    public function fetchContractById() {
-
+    public function fetchContractById($roomId) {
+        
     }
 
     public function addReceipt(Request $request ,$id) {
