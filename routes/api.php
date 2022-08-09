@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\ApartmentRoomController;
 use App\Http\Controllers\RoomFeeController;
-
+use App\Http\Controllers\Statistic;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -89,5 +89,11 @@ Route::group(['prefix' => 'apartment-room'], function () {
 // room fee
 Route::group(['prefix' => 'fee'], function () {
   Route::get('/list', [RoomFeeController::class, 'listRoomFee']);
-  Route::get('/list/{id}', [RoomfeeController::class, 'listReceipt']);
+  Route::get('/list/{id}', [RoomFeeController::class, 'listReceipt']);
+  Route::get('/fetch-room', [RoomFeeController::class, 'fethRoomById']);
+  Route::post('/add/{id}', [RoomFeeController::class, 'addReceipt']);
+  Route::get('/edit/{id}', [RoomFeeController::class, 'editReceipt']);
 });
+
+//
+Route::get('/statistic', [Statistic::class, 'statistic']);

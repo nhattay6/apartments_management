@@ -22,6 +22,13 @@ class RoomFeeController extends Controller
     //     ];
     //     return response()->json(); 
     // }   
+    public function fethRoomById() {
+    
+    }
+
+    public function fetchContractById() {
+
+    }
 
     public function addReceipt(Request $request ,$id) {
         $request->validate([
@@ -40,6 +47,8 @@ class RoomFeeController extends Controller
             'charge_date' => $request->charge_date,
             'apartment_room_id' => $id
         ];
+
+        // $contractCurrent = 
     }
 
     public function editReceipt(Request $request, $id) {
@@ -48,8 +57,7 @@ class RoomFeeController extends Controller
             'water_number' => 'required',
             'total_paid' => 'required',
             'total_price' => 'required',
-        ]);    
+        ]);
     }
-
 
 }

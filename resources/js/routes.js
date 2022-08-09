@@ -19,6 +19,9 @@ const editApartment = () => import('./pages/apartment/EditApartment.vue')
 // room fee
 const listFee = () => import('./pages/fee_room/ListFee.vue') 
 
+// test
+const testChart = () => import('./pages/statistical/TestChart.vue')
+
 export const routes = [
     {   
         path: '/home',
@@ -92,8 +95,8 @@ export const routes = [
     // },
     {
         path: '/test',
-        component: test,
-        name: "test"
+        component: testChart,
+        name: "testChart"
     },
     // { path: '/apartment/add', name: 'add-apartment', component: addApartment },
     // { path: '/apartment/edit', name: 'edit-apartment', component: editApartment },

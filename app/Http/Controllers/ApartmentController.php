@@ -83,14 +83,11 @@ class ApartmentController extends Controller
     public function search($name, $address) {
         // $listApartment = Apartment::orderBy('id');
         if(!empty($name)) {
-            // $listApartment = $listApartment->where('name', 'LIKE', '%' . $name . '%');
             $listApartment = Apartment::where('name', 'LIKE', '%' . $name . '%')->orderBy('name');
         }
         if(!empty($address)) {
-            // $listApartment = $listApartment->where('name', 'LIKE', '%' . $address . '%');
             $listApartment = Apartment::where('name', 'LIKE', '%' . $address . '%')->orderBy('address');
         }
-        // $listApartment =  $listApartment->get();
         return response()->json(['data' => $listApartment]);
     }
 }

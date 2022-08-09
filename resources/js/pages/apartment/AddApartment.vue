@@ -9,9 +9,9 @@
     <div class="container">
       <form action="">
         <label for="fname">Apartment Name</label>
-        <!-- <ul>
-          <li style="color: red">{{ $message }}</li>
-        </ul> -->
+        <ul>
+          <li style="color: red">{{ msg[0] }}</li>
+        </ul>
         <input
           class="input-custom"
           type="text"
@@ -22,9 +22,9 @@
         />
 
         <label for="lname">Apartment Address</label>
-        <!-- <ul>
-          <li style="color: red">{{ $message }}</li>
-        </ul> -->
+        <ul>
+          <li style="color: red">{{ msg[1] }}</li>
+        </ul>
         <input
           class="input-custom"
           type="text"
@@ -57,24 +57,47 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   mounted() {},
   data() {
     return {
       addFormData: {
         name: "",
-        adress: "",
+        address: "",
         image: "",
       },
+      msg: [],
     };
   },
   methods: {
     back() {
       this.$router.push("/home/apartment");
     },
-    validateForm() {},
-    submitForm() {
-      //use validate form},
+    validateForm() {
+      if (this.addFormData.name.trim() == "") {
+        this.msg[0] = "Apartment Name is required";
+        return false;
+      }
+      if (this.addFormData.adress.trim() == "") {
+        this.msg[1] = "address is required";
+        return false;
+      }
+
+      return true;
+    },
+    async submitForm() {
+      const validate = this.validateForm();
+      if (validate) {
+        await axios
+          .post("/apartment/add", this.addFormData)
+          .then((res) => {
+            const data = res.data;
+            this.$router.push("/home/apartment-list");
+            return data;
+          })
+          .catch((err) => console.log(err));
+      }
     },
   },
 };
