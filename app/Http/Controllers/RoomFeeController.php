@@ -57,7 +57,21 @@ class RoomFeeController extends Controller
             'apartment_room_id' => $id
         ];
 
-        // $contractCurrent = 
+        $contractCurrent = TenantContract::where('start_date', '<', $request->charge_date)
+            ->where('end_date', '>', $request->charge_date)
+            ->where('apartment_room_id', $id)
+            ->first();
+        
+        if($contractCurrent) {
+            $newReceipt['tenant_id'] = $contractCurrent->tenant_id;
+            $newContract = TenantContract::create($newReceipt);
+            return response()->json();
+        } else {
+            return response()->json([
+                'current_contract' => true,
+                'msg' => 'no one tenant in the current month'
+            ]);
+        }
     }
 
     public function editReceipt(Request $request, $id) {
