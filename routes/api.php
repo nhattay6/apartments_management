@@ -90,7 +90,8 @@ Route::group(['prefix' => 'apartment-room'], function () {
 Route::group(['prefix' => 'fee'], function () {
   Route::get('/list', [RoomFeeController::class, 'listRoomFee']);
   Route::get('/list/{id}', [RoomFeeController::class, 'listReceipt']);
-  Route::get('/fetch-room', [RoomFeeController::class, 'fethRoomById']);
+  Route::get('/fetch-room/{id}', [RoomFeeController::class, 'fethRoomById']);
+  Route::get('/fetch-contract/{id}', [RoomFeeController::class, 'fetchContractById']);
   Route::post('/add/{id}', [RoomFeeController::class, 'addReceipt']);
   Route::get('/edit/{id}', [RoomFeeController::class, 'editReceipt']);
 });

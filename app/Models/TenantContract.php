@@ -13,6 +13,8 @@ class TenantContract extends Model
         'id', 'apartment_room_id', 'tenant_id', 'start_date', 'price', 'water_price', 'electricity_price', 'note'
     ];
     protected $primaryKey = 'id';
+    // protected $table = 'tenant_contracts';
+
     public function apartmentRoom() { 
         $this->belongsTo(ApartmentRoom::class, 'apartment_room_id');
     }
