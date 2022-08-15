@@ -44,4 +44,9 @@ class MonthlyCostController extends Controller
             'edit_cost' => $edit,
         ]);
     }
+
+    public function fetchCost($id) {
+        $costMonth = MonthlyCost::find($id);
+        return response()->json($costMonth);
+    }
 }

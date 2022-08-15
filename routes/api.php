@@ -7,6 +7,7 @@ use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\ApartmentRoomController;
 use App\Http\Controllers\RoomFeeController;
 use App\Http\Controllers\Statistic;
+use App\Http\Controllers\MonthlyCostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -96,5 +97,17 @@ Route::group(['prefix' => 'fee'], function () {
   Route::get('/edit/{id}', [RoomFeeController::class, 'editReceipt']);
 });
 
-//
+//statistic
 Route::get('/statistic', [Statistic::class, 'statistic']);
+
+//admin
+
+Route::group(['prefix' => 'admin'], function () {
+  Route::get('/user-list', [MonthlyCostController::class, '']);
+  Route::group(['prefix' => 'monthly-cost'], function () {
+    Route::get('/fetch-cost', [MonthlyCostController::class, 'fetchCost']);
+    Route::post('/add', [MonthlyCostController::class, 'add']);
+    Route::post('/edit', [MonthlyCostController::class, 'edit']);
+    Route::delete('/delete', [MonthlyCostController::class, 'delete']);
+  });
+});
